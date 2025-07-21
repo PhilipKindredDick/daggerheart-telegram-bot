@@ -1,3 +1,10 @@
+from flask import Flask, render_template_string, request, jsonify
+import threading
+import os
+from config import PORT
+
+app = Flask(__name__)
+
 # HTML для Mini App
 WEBAPP_HTML = """
 <!DOCTYPE html>
@@ -834,6 +841,44 @@ app = Flask(__name__)
 </body>
 </html>
 """
+
+
+@app.route('/')
+def index():
+    """Главная страница Mini App"""
+    return render_template_string(WEBAPP_HTML)
+
+
+@app.route('/api/character', methods=['POST'])
+def create_character():
+    """API для создания персонажа"""
+    data = request.json
+    # Пока что просто возвращаем данные
+    return jsonify({"status": "success", "character": data})
+
+
+@app.route('/api/action', methods=['POST'])
+def game_action():
+    """API для игровых действий"""
+    data = request.json
+    # Здесь будет интеграция с DeepSeek
+    return jsonify({"status": "success", "gm_response": "Пока что заглушка ГМ"})
+
+
+@app.route('/health')
+def health_check():
+    """Проверка работоспособности сервера"""
+    return jsonify({"status": "ok", "message": "Daggerheart WebApp is running"})
+
+
+def run_webapp():
+    """Запуск веб-приложения"""
+    print(f"🌐 Запуск веб-сервера на порту {PORT}")
+    app.run(host='0.0.0.0', port=PORT, debug=False)
+
+
+if __name__ == "__main__":
+    run_webapp()
 
 
 @app.route('/')
