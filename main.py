@@ -69,6 +69,9 @@ class DaggerheartBot:
 
     async def start_game(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Запуск игровой сессии"""
+        logger.info(f"Открытие игры для пользователя {update.effective_user.id}")
+        logger.info(f"WEBAPP_URL: {WEBAPP_URL}")
+
         keyboard = [
             [InlineKeyboardButton(
                 "🎮 Открыть игру",

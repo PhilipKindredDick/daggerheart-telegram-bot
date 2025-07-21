@@ -15,6 +15,9 @@ DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
 
 # Веб-приложение
 WEBAPP_URL = os.getenv("WEBAPP_URL", "https://your-replit-url.replit.dev")
+if WEBAPP_URL == "https://your-replit-url.replit.dev":
+    print("⚠️ ВНИМАНИЕ: WEBAPP_URL не настроен!")
+    print("Добавь правильный URL в Secrets на Replit")
 PORT = int(os.getenv("PORT", 8080))
 
 # База данных
